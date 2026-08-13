@@ -1,16 +1,760 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Al Maas Al Malaki — Steel Suppliers &amp; Stockist in UAE &amp; GCC</title>
-<meta name="description" content="Al Maas Al Malaki Bldg. Mat. Tr — trusted steel stockist, supplier, importer and exporter in the UAE and GCC. Structural steel, pipes, sheets, coils, stainless steel, aluminium and mesh — ex-stock in Sharjah.">
-<link rel="icon" href="logo.webp">
-<link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
-<div id="app"></div>
-<script src="catalog.js"></script>
-<script src="app.js"></script>
+<x-dc>
+<helmet>
+<style>
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #ECBE07; }
+  @keyframes heroZoom { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+</style>
+<meta name="ext-resource-dependency" content="assets/cat-structural.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-ms.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-pipes.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-sheets.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-ss.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-aluminum.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-mesh.jpg">
+<meta name="ext-resource-dependency" content="assets/chequered-steel-sheets.png">
+<meta name="ext-resource-dependency" content="assets/gi-sheets.png">
+<meta name="ext-resource-dependency" content="assets/shaft-bars.png">
+<meta name="ext-resource-dependency" content="assets/steel-angles.png">
+<meta name="ext-resource-dependency" content="assets/industry-construction.jpg">
+<meta name="ext-resource-dependency" content="assets/industry-oilgas.jpg">
+<meta name="ext-resource-dependency" content="assets/industry-fabrication.jpg">
+<meta name="ext-resource-dependency" content="assets/industry-infrastructure.jpg">
+<meta name="ext-resource-dependency" content="assets/industry-manufacturing.jpg">
+<meta name="ext-resource-dependency" content="assets/industry-marine.jpg">
+</helmet>
+
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#2f357a"/><text x="100" y="105" font-size="28" fill="#ECBE07" text-anchor="middle" font-family="sans-serif" font-weight="bold">AMM</text></svg></template>
+<div style="display:flex;flex-direction:column;min-height:100vh;background:#fff;color:#1f2937">
+
+  <!-- HEADER -->
+  <header style="position:sticky;top:0;z-index:50;width:100%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.06)">
+    <div style="background:#2f357a;color:#fff;font-size:12px">
+      <div style="max-width:1280px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <a href="{{ company.phoneHref }}" style="display:flex;align-items:center;gap:6px;color:#fff">{{ company.phone }}</a>
+          <a href="{{ company.mobileHref }}" style="display:flex;align-items:center;gap:6px;color:#fff">{{ company.mobile }}</a>
+          <a href="mailto:{{ company.email }}" style="display:flex;align-items:center;gap:6px;color:#fff">{{ company.email }}</a>
+        </div>
+        <div style="opacity:0.9">{{ company.address }}</div>
+      </div>
+    </div>
+
+    <div style="max-width:1280px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <a href="javascript:void(0)" onClick="{{ goHome }}" style="display:flex;align-items:center;gap:12px;color:#1f2937">
+        <img src="https://al-maas-al-malaki.lovable.app/__l5e/assets-v1/3034617d-ce85-40cd-859c-496f436fdf33/al-maas-al-malaki-logo.webp" alt="Al Maas Al Malaki logo" width="48" height="48" style="height:48px;width:48px;object-fit:contain" />
+        <div>
+          <div style="font-size:16px;font-weight:700;line-height:1.2;color:#2f357a">Al Maas Al Malaki</div>
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#6b7280">Building Materials Trading</div>
+        </div>
+      </a>
+
+      <nav style="display:flex;align-items:center;gap:2px;flex-wrap:wrap">
+        <a href="javascript:void(0)" onClick="{{ goHome }}" style="padding:8px 16px;font-size:14px;font-weight:500;color:#374151">Home</a>
+        <div style="position:relative" onMouseEnter="{{ setProdOpenTrue }}" onMouseLeave="{{ setProdOpenFalse }}">
+          <a href="javascript:void(0)" onClick="{{ goProducts }}" style="display:flex;align-items:center;gap:4px;padding:8px 16px;font-size:14px;font-weight:500;color:#374151">Products ▾</a>
+          <sc-if value="{{ prodOpen }}">
+            <div style="position:absolute;right:0;top:100%;width:900px;max-width:95vw;border-radius:8px;background:#fff;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,0.15);border:1px solid #e5e7eb;display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+              <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="7">
+                <div>
+                  <a href="javascript:void(0)" onClick="{{ cat.onClick }}" style="font-weight:600;font-size:14px;color:#2f357a">{{ cat.name }}</a>
+                  <div style="margin-top:4px;display:flex;flex-direction:column;gap:2px">
+                    <sc-for list="{{ cat.topProducts }}" as="p" hint-placeholder-count="3">
+                      <a href="javascript:void(0)" onClick="{{ p.onClick }}" style="font-size:12px;color:#4b5563">{{ p.name }}</a>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
+        <a href="javascript:void(0)" onClick="{{ goAbout }}" style="padding:8px 16px;font-size:14px;font-weight:500;color:#374151">About Us</a>
+        <a href="javascript:void(0)" onClick="{{ goContact }}" style="padding:8px 16px;font-size:14px;font-weight:500;color:#374151">Contact Us</a>
+        <a href="javascript:void(0)" onClick="{{ goContact }}" style="margin-left:12px;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:700;color:#2f357a;background:#ECBE07">Enquire Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="flex:1">
+
+  <!-- HOME -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div>
+      <section style="position:relative;overflow:hidden">
+        <img src="assets/hero-steel.jpg" alt="Steel warehouse — Al Maas Al Malaki UAE stockyard" style="position:absolute;inset:0;height:100%;width:100%;object-fit:cover;animation:heroZoom 16s ease-in-out infinite alternate;transform-origin:center" />
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(47,53,122,0.92) 0%, rgba(47,53,122,0.75) 60%, rgba(47,53,122,0.4) 100%)"></div>
+        <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 16px;color:#fff">
+          <span style="display:inline-block;border-radius:999px;background:#ECBE07;padding:4px 12px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#2f357a">Steel Stockist • UAE &amp; GCC</span>
+          <h1 style="margin-top:20px;font-size:52px;font-weight:700;line-height:1.15;max-width:760px">Your Trusted Steel Supplier in the UAE and GCC</h1>
+          <p style="margin-top:24px;max-width:640px;font-size:18px;color:rgba(255,255,255,0.9)">{{ company.name }} — steel importers, exporters and stockists of structural steel, MS products, pipes &amp; tubes, sheets &amp; coils, stainless steel, aluminium and mesh &amp; gratings. Deep stock, certified quality, GCC-wide delivery.</p>
+          <div style="margin-top:32px;display:flex;flex-wrap:wrap;gap:12px">
+            <a href="javascript:void(0)" onClick="{{ goProducts }}" style="display:inline-flex;align-items:center;gap:8px;border-radius:6px;padding:12px 24px;font-size:14px;font-weight:700;color:#2f357a;background:#ECBE07">Explore Our Products →</a>
+            <a href="javascript:void(0)" onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:8px;border-radius:6px;border:2px solid #fff;padding:12px 24px;font-size:14px;font-weight:700;color:#fff">Contact Us</a>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1280px;margin:0 auto;padding:64px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:40px;align-items:center">
+        <div>
+          <h2 style="font-size:30px;font-weight:700;color:#2f357a;margin:0">A Reliable Name in Steel Trading Since Day One</h2>
+          <p style="margin-top:16px;color:#374151;line-height:1.7">Based in the Al Sajaa Industrial Area, Sharjah, Al Maas Al Malaki Building Materials Trading is a full-service steel stockist and trading house serving contractors, EPC firms, fabricators, workshops and OEMs across the UAE and the wider GCC region — Saudi Arabia, Oman, Kuwait, Qatar and Bahrain.</p>
+          <p style="margin-top:12px;color:#374151;line-height:1.7">We combine a deep, ready stock of structural and mild steel, pipes, tubes, sheets, coils, stainless steel and aluminium with certified quality (EN 10204 3.1 MTC), competitive pricing and dependable delivery — so your project keeps moving.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ECBE07" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.5 9.5-.35.15-.65.15-1 0C7.5 20.5 4 18 4 13V6l8-4 8 4z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            <div style="margin-top:12px;font-weight:600;color:#2f357a">Certified Quality</div>
+            <div style="font-size:14px;color:#6b7280;margin-top:4px">Mill test certificates on all steel products.</div>
+          </div>
+          <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ECBE07" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path><path d="M15 18H9"></path><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path><circle cx="17" cy="18" r="2"></circle><circle cx="7" cy="18" r="2"></circle></svg>
+            <div style="margin-top:12px;font-weight:600;color:#2f357a">GCC-Wide Delivery</div>
+            <div style="font-size:14px;color:#6b7280;margin-top:4px">UAE, KSA, Oman, Qatar, Kuwait, Bahrain.</div>
+          </div>
+          <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ECBE07" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <div style="margin-top:12px;font-weight:600;color:#2f357a">24/7 Enquiries</div>
+            <div style="font-size:14px;color:#6b7280;margin-top:4px">WhatsApp support around the clock.</div>
+          </div>
+          <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ECBE07" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+            <div style="margin-top:12px;font-weight:600;color:#2f357a">Wide Stock Range</div>
+            <div style="font-size:14px;color:#6b7280;margin-top:4px">Structural, MS, SS, pipes, sheets &amp; more.</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:#f9fafb;padding:64px 0">
+        <div style="max-width:1280px;margin:0 auto;padding:0 16px">
+          <div style="text-align:center;margin-bottom:40px">
+            <h2 style="font-size:30px;font-weight:700;color:#2f357a;margin:0">Our Product Range</h2>
+            <p style="margin-top:8px;color:#6b7280">Seven core categories covering the full spectrum of steel trading in the UAE.</p>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px">
+            <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="7">
+              <a href="javascript:void(0)" onClick="{{ cat.onClick }}" style="display:block;overflow:hidden;border-radius:12px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.05);border:1px solid #e5e7eb;color:#1f2937;transition:transform 0.3s ease,box-shadow 0.3s ease" style-hover="transform:translateY(-6px);box-shadow:0 16px 32px rgba(0,0,0,0.15)">
+                <div style="aspect-ratio:4/3;overflow:hidden">
+                  <img src="{{ cat.image }}" alt="{{ cat.name }} supplier UAE — Al Maas Al Malaki" style="height:100%;width:100%;object-fit:cover" />
+                </div>
+                <div style="padding:20px">
+                  <h3 style="font-weight:700;font-size:18px;color:#2f357a;margin:0">{{ cat.name }}</h3>
+                  <p style="margin-top:4px;font-size:14px;color:#6b7280">{{ cat.short }}</p>
+                  <span style="margin-top:12px;display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:600;color:#ECBE07">View Category →</span>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding:64px 0">
+        <div style="max-width:1280px;margin:0 auto;padding:0 16px">
+          <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:32px;flex-wrap:wrap">
+            <div>
+              <h2 style="font-size:30px;font-weight:700;color:#2f357a;margin:0">Industries We Serve</h2>
+              <p style="margin-top:8px;color:#6b7280;max-width:640px">Our steel products power projects across construction, oil &amp; gas, infrastructure, manufacturing and more — throughout the UAE and GCC.</p>
+            </div>
+            <div style="display:flex;gap:8px;flex-shrink:0">
+              <button onClick="{{ scrollLeft }}" aria-label="Previous industries" style="display:grid;place-items:center;height:40px;width:40px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;color:#2f357a;cursor:pointer">←</button>
+              <button onClick="{{ scrollRight }}" aria-label="Next industries" style="display:grid;place-items:center;height:40px;width:40px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;color:#2f357a;cursor:pointer">→</button>
+            </div>
+          </div>
+          <div ref="{{ industriesRef }}" style="display:flex;gap:20px;overflow-x:auto;padding-bottom:16px;scroll-behavior:smooth">
+            <sc-for list="{{ industries }}" as="ind" hint-placeholder-count="6">
+              <article style="flex-shrink:0;width:340px;border-radius:12px;overflow:hidden;background:#fff;border:1px solid #e5e7eb;box-shadow:0 1px 2px rgba(0,0,0,0.05);transition:transform 0.3s ease,box-shadow 0.3s ease" style-hover="transform:translateY(-6px);box-shadow:0 16px 32px rgba(0,0,0,0.15)">
+                <div style="aspect-ratio:4/3;overflow:hidden">
+                  <img src="{{ ind.image }}" alt="{{ ind.title }} — steel supplied by Al Maas Al Malaki UAE" style="height:100%;width:100%;object-fit:cover" />
+                </div>
+                <div style="padding:20px">
+                  <h3 style="font-weight:700;font-size:18px;color:#2f357a;margin:0">{{ ind.title }}</h3>
+                  <p style="margin-top:8px;font-size:14px;color:#6b7280">{{ ind.desc }}</p>
+                </div>
+              </article>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section style="background:#f9fafb;padding:64px 0">
+        <div style="max-width:900px;margin:0 auto;padding:0 16px">
+          <div style="text-align:center;margin-bottom:40px">
+            <h2 style="font-size:30px;font-weight:700;color:#2f357a;margin:0">Frequently Asked Questions</h2>
+            <p style="margin-top:8px;color:#6b7280">Common questions about ordering steel from Al Maas Al Malaki in the UAE &amp; GCC.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+              <div style="border-radius:8px;background:#fff;border:1px solid #e5e7eb;padding:20px">
+                <div onClick="{{ f.toggle }}" style="cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;font-weight:600;color:#2f357a">
+                  <span>{{ f.q }}</span>
+                  <span style="flex-shrink:0;margin-top:2px;font-size:20px;line-height:1;color:#ECBE07">{{ f.sign }}</span>
+                </div>
+                <sc-if value="{{ f.open }}">
+                  <p style="margin-top:12px;font-size:14px;color:#374151;line-height:1.7">{{ f.a }}</p>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- PRODUCTS INDEX -->
+  <sc-if value="{{ isProducts }}">
+    <div>
+      <section style="padding:56px 0;background:#2f357a">
+        <div style="max-width:1280px;margin:0 auto;padding:0 16px;color:#fff">
+          <h1 style="font-size:36px;font-weight:700;margin:0">Our Steel Products</h1>
+          <p style="margin-top:12px;max-width:760px;color:rgba(255,255,255,0.85)">Al Maas Al Malaki stocks a comprehensive range of steel and building materials — organised into seven core categories. Each category page lists specifications, applications and enquiry options for every product we supply across the UAE and GCC.</p>
+        </div>
+      </section>
+      <section style="max-width:1280px;margin:0 auto;padding:56px 16px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px">
+          <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="7">
+            <a href="javascript:void(0)" onClick="{{ cat.onClick }}" style="display:block;overflow:hidden;border-radius:12px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.05);border:1px solid #e5e7eb;color:#1f2937;transition:transform 0.3s ease,box-shadow 0.3s ease" style-hover="transform:translateY(-6px);box-shadow:0 16px 32px rgba(0,0,0,0.15)">
+              <div style="aspect-ratio:4/3;overflow:hidden">
+                <img src="{{ cat.image }}" alt="{{ cat.name }} — Al Maas Al Malaki UAE" style="height:100%;width:100%;object-fit:cover" />
+              </div>
+              <div style="padding:20px">
+                <h2 style="font-weight:700;font-size:18px;color:#2f357a;margin:0">{{ cat.name }}</h2>
+                <p style="margin-top:4px;font-size:14px;color:#6b7280">{{ cat.short }}</p>
+                <div style="margin-top:12px;font-size:12px;color:#6b7280">{{ cat.productCount }} products</div>
+                <span style="margin-top:12px;display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:600;color:#ECBE07">View Category →</span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- CATEGORY PAGE -->
+  <sc-if value="{{ isCategory }}">
+    <div>
+      <section style="padding:48px 0;background:#2f357a">
+        <div style="max-width:1280px;margin:0 auto;padding:0 16px;color:#fff">
+          <nav style="font-size:12px;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:6px;margin-bottom:12px">
+            <a href="javascript:void(0)" onClick="{{ goHome }}" style="color:rgba(255,255,255,0.7)">Home</a><span>›</span>
+            <a href="javascript:void(0)" onClick="{{ goProducts }}" style="color:rgba(255,255,255,0.7)">Products</a><span>›</span>
+            <span>{{ currentCategory.name }}</span>
+          </nav>
+          <h1 style="font-size:36px;font-weight:700;margin:0">{{ currentCategory.name }}</h1>
+          <p style="margin-top:16px;max-width:900px;color:rgba(255,255,255,0.9);line-height:1.7">{{ currentCategory.intro }}</p>
+        </div>
+      </section>
+      <section style="max-width:1280px;margin:0 auto;padding:56px 16px">
+        <h2 style="font-size:24px;font-weight:700;color:#2f357a;margin:0 0 24px 0">{{ currentCategory.name }} Product Range</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px">
+          <sc-for list="{{ currentCategory.products }}" as="p" hint-placeholder-count="6">
+            <a href="javascript:void(0)" onClick="{{ p.onClick }}" style="display:block;overflow:hidden;border-radius:12px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.05);border:1px solid #e5e7eb;color:#1f2937;transition:transform 0.3s ease,box-shadow 0.3s ease" style-hover="transform:translateY(-6px);box-shadow:0 16px 32px rgba(0,0,0,0.15)">
+              <div style="aspect-ratio:4/3;overflow:hidden;background:#f3f4f6">
+                <img src="{{ p.cardImage }}" alt="{{ p.name }} supplier UAE – Al Maas Al Malaki" style="height:100%;width:100%;object-fit:cover" />
+              </div>
+              <div style="padding:20px">
+                <h3 style="font-weight:600;color:#2f357a;margin:0">{{ p.name }}</h3>
+                <p style="margin-top:4px;font-size:14px;color:#6b7280">{{ p.teaser }}</p>
+                <span style="margin-top:12px;display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:600;color:#ECBE07">View Product →</span>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- PRODUCT PAGE -->
+  <sc-if value="{{ isProduct }}">
+    <div>
+      <section style="border-bottom:1px solid #e5e7eb;background:#f9fafb">
+        <div style="max-width:1280px;margin:0 auto;padding:12px 16px">
+          <nav style="font-size:12px;color:#6b7280;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <a href="javascript:void(0)" onClick="{{ goHome }}" style="color:#6b7280">Home</a><span>›</span>
+            <a href="javascript:void(0)" onClick="{{ goProducts }}" style="color:#6b7280">Products</a><span>›</span>
+            <a href="javascript:void(0)" onClick="{{ currentCategory.onClick }}" style="color:#6b7280">{{ currentCategory.name }}</a><span>›</span>
+            <span style="color:#111827">{{ currentProduct.name }}</span>
+          </nav>
+        </div>
+      </section>
+
+      <section style="max-width:1280px;margin:0 auto;padding:40px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:40px">
+        <div style="border-radius:12px;overflow:hidden;background:#f3f4f6;border:1px solid #e5e7eb">
+          <img src="{{ currentProduct.cardImage }}" alt="{{ currentProduct.name }} supplier UAE – Al Maas Al Malaki" style="width:100%;height:100%;object-fit:cover" />
+        </div>
+        <div>
+          <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;font-weight:700;color:#ECBE07">{{ currentCategory.name }}</div>
+          <h1 style="margin-top:8px;font-size:32px;font-weight:700;color:#2f357a">{{ currentProduct.name }}</h1>
+          <p style="margin-top:12px;color:#374151">{{ currentProduct.teaser }}</p>
+          <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:12px">
+            <a href="{{ enquireUrl }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:8px;border-radius:6px;padding:12px 24px;font-size:14px;font-weight:700;color:#2f357a;background:#ECBE07">Enquire Now</a>
+            <a href="javascript:void(0)" onClick="{{ goContact }}" style="display:inline-flex;align-items:center;gap:8px;border-radius:6px;border:2px solid #2f357a;padding:12px 24px;font-size:14px;font-weight:700;color:#2f357a">Contact Sales</a>
+          </div>
+          <div style="margin-top:32px">
+            <h2 style="font-size:18px;font-weight:700;color:#2f357a;margin:0 0 12px 0">Specifications</h2>
+            <div style="border-radius:8px;border:1px solid #e5e7eb;overflow:hidden">
+              <table style="width:100%;font-size:14px;border-collapse:collapse">
+                <tbody>
+                  <sc-for list="{{ currentProduct.specs }}" as="s" hint-placeholder-count="6">
+                    <tr style="background:{{ s.rowBg }}">
+                      <td style="padding:10px 16px;font-weight:600;color:#374151;width:50%">{{ s.label }}</td>
+                      <td style="padding:10px 16px;color:#1f2937">{{ s.value }}</td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1280px;margin:0 auto;padding:0 16px 32px 16px">
+        <div style="border-radius:12px;border:1px solid #e5e7eb;padding:32px;background:#f9fafb">
+          <h2 style="font-size:24px;font-weight:700;color:#2f357a;margin:0">About {{ currentProduct.name }}</h2>
+          <p style="margin-top:12px;color:#374151;line-height:1.7">{{ currentProduct.description }}</p>
+          <div style="margin-top:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
+            <div>
+              <h3 style="font-weight:600;color:#111827;margin:0">Applications</h3>
+              <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px">
+                <sc-for list="{{ currentProduct.applications }}" as="app" hint-placeholder-count="4">
+                  <div style="display:flex;align-items:center;gap:8px;font-size:14px;color:#374151">
+                    <span style="color:#ECBE07">✓</span> {{ app }}
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div>
+              <h3 style="font-weight:600;color:#111827;margin:0">Why choose Al Maas Al Malaki for {{ currentProduct.name }}?</h3>
+              <p style="margin-top:8px;font-size:14px;color:#374151;line-height:1.7">As one of the UAE's most established steel stockists, we combine deep ready stock at our Sharjah yard with certified quality (EN 10204 3.1 MTC), transparent pricing and reliable GCC-wide delivery. Contact our team at {{ company.phone }} or {{ company.mobile }} for a fast quotation on {{ currentProduct.name }}.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <sc-if value="{{ hasRelated }}">
+        <section style="max-width:1280px;margin:0 auto;padding:24px 16px 56px 16px">
+          <h2 style="font-size:24px;font-weight:700;color:#2f357a;margin:0 0 24px 0">Related {{ currentCategory.name }} Products</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
+            <sc-for list="{{ relatedProducts }}" as="p" hint-placeholder-count="4">
+              <a href="javascript:void(0)" onClick="{{ p.onClick }}" style="display:block;overflow:hidden;border-radius:12px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,0.05);border:1px solid #e5e7eb;color:#1f2937;transition:transform 0.3s ease,box-shadow 0.3s ease" style-hover="transform:translateY(-6px);box-shadow:0 16px 32px rgba(0,0,0,0.15)">
+                <div style="aspect-ratio:4/3;overflow:hidden;background:#f3f4f6">
+                  <img src="{{ p.cardImage }}" alt="{{ p.name }} supplier UAE" style="height:100%;width:100%;object-fit:cover" />
+                </div>
+                <div style="padding:16px">
+                  <h3 style="font-weight:600;font-size:14px;color:#2f357a;margin:0">{{ p.name }}</h3>
+                  <span style="margin-top:8px;display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:#ECBE07">View →</span>
+                </div>
+              </a>
+            </sc-for>
+          </div>
+        </section>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <!-- ABOUT -->
+  <sc-if value="{{ isAbout }}">
+    <div>
+      <section style="padding:56px 0;background:#2f357a">
+        <div style="max-width:1280px;margin:0 auto;padding:0 16px;color:#fff">
+          <h1 style="font-size:36px;font-weight:700;margin:0">About Al Maas Al Malaki</h1>
+          <p style="margin-top:12px;max-width:760px;color:rgba(255,255,255,0.85)">A trusted name in steel trading — stockist, importer, exporter and supplier — serving the UAE and GCC.</p>
+        </div>
+      </section>
+      <section style="max-width:1280px;margin:0 auto;padding:56px 16px;display:grid;grid-template-columns:2fr 1fr;gap:40px">
+        <div style="color:#374151;line-height:1.7;display:flex;flex-direction:column;gap:16px">
+          <h2 style="font-size:24px;font-weight:700;color:#2f357a;margin:0">Our Story</h2>
+          <p>Founded to serve the growing infrastructure and construction market of the UAE, {{ company.name }} has grown into an established steel trading company with a solid reputation for reliability, quality and service. From our headquarters and stockyard in Al Sajaa Industrial Area, Sharjah, we handle the full spectrum of steel trading — stockist, importer, exporter and supplier — across every major product category the industry needs.</p>
+          <p>Our clients include EPC contractors, fabricators, workshops, oil &amp; gas service companies, marine operators, HVAC and roofing contractors, and OEMs across the UAE, Saudi Arabia, Oman, Qatar, Kuwait and Bahrain. What ties them together is a need for dependable supply of certified steel — and that is exactly what we deliver.</p>
+          <h2 style="font-size:24px;font-weight:700;color:#2f357a;margin:16px 0 0 0">What We Offer</h2>
+          <p>Structural steel, mild steel (MS) products, steel pipes and tubes, sheets and coils, stainless steel, aluminium and mesh &amp; gratings — all backed by mill test certificates and traceability. Whether you need a single beam ex-stock or bulk indent supply of coils and plates, our commercial and logistics team is ready to help.</p>
+          <h2 style="font-size:24px;font-weight:700;color:#2f357a;margin:16px 0 0 0">Why Customers Trust Us</h2>
+          <ul style="padding-left:22px;margin:0;display:flex;flex-direction:column;gap:8px">
+            <li>Wide, ready stock across seven product categories</li>
+            <li>Certified quality — EN 10204 3.1 mill test certificates</li>
+            <li>Transparent, competitive pricing</li>
+            <li>GCC-wide delivery from our Sharjah stockyard</li>
+            <li>24/7 enquiry response via WhatsApp and email</li>
+            <li>Personalised service from an experienced trading team</li>
+          </ul>
+        </div>
+        <aside style="display:flex;flex-direction:column;gap:16px">
+          <sc-for list="{{ aboutCards }}" as="c" hint-placeholder-count="4">
+            <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+              <div style="width:28px;height:28px;border-radius:6px;background:#ECBE07"></div>
+              <div style="margin-top:12px;font-weight:600;color:#2f357a">{{ c.t }}</div>
+              <div style="font-size:14px;color:#6b7280;margin-top:4px">{{ c.d }}</div>
+            </div>
+          </sc-for>
+          <a href="javascript:void(0)" onClick="{{ goContact }}" style="display:block;text-align:center;border-radius:6px;padding:12px 24px;font-size:14px;font-weight:700;color:#2f357a;background:#ECBE07">Get In Touch</a>
+        </aside>
+      </section>
+    </div>
+  </sc-if>
+
+  <!-- CONTACT -->
+  <sc-if value="{{ isContact }}">
+    <div>
+      <section style="padding:56px 0;background:#2f357a">
+        <div style="max-width:1280px;margin:0 auto;padding:0 16px;color:#fff">
+          <h1 style="font-size:36px;font-weight:700;margin:0">Contact Us</h1>
+          <p style="margin-top:12px;max-width:760px;color:rgba(255,255,255,0.85)">Get in touch for pricing, availability, mill certificates and delivery options across the UAE and GCC.</p>
+        </div>
+      </section>
+      <section style="max-width:1280px;margin:0 auto;padding:56px 16px;display:grid;grid-template-columns:2fr 1fr;gap:40px">
+        <div style="border-radius:12px;border:1px solid #e5e7eb;padding:32px;background:#fff">
+          <h2 style="font-size:24px;font-weight:700;color:#2f357a;margin:0">Send Us a Message</h2>
+          <form onSubmit="{{ onContactSubmit }}" style="margin-top:20px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+              <div>
+                <label style="font-size:14px;font-weight:600;color:#374151">Name <span style="color:#dc2626">*</span></label>
+                <input ref="{{ contactNameRef }}" type="text" required="true" maxlength="200" style="margin-top:4px;width:100%;border-radius:6px;border:1px solid #d1d5db;padding:8px 12px;box-sizing:border-box" />
+              </div>
+              <div>
+                <label style="font-size:14px;font-weight:600;color:#374151">Email <span style="color:#dc2626">*</span></label>
+                <input ref="{{ contactEmailRef }}" type="email" required="true" maxlength="200" style="margin-top:4px;width:100%;border-radius:6px;border:1px solid #d1d5db;padding:8px 12px;box-sizing:border-box" />
+              </div>
+              <div>
+                <label style="font-size:14px;font-weight:600;color:#374151">Phone</label>
+                <input ref="{{ contactPhoneRef }}" type="tel" maxlength="200" style="margin-top:4px;width:100%;border-radius:6px;border:1px solid #d1d5db;padding:8px 12px;box-sizing:border-box" />
+              </div>
+              <div>
+                <label style="font-size:14px;font-weight:600;color:#374151">Subject</label>
+                <input type="text" maxlength="200" style="margin-top:4px;width:100%;border-radius:6px;border:1px solid #d1d5db;padding:8px 12px;box-sizing:border-box" />
+              </div>
+            </div>
+            <div>
+              <label style="font-size:14px;font-weight:600;color:#374151">Message</label>
+              <textarea ref="{{ contactMessageRef }}" required="true" rows="5" maxlength="2000" style="margin-top:4px;width:100%;border-radius:6px;border:1px solid #d1d5db;padding:8px 12px;box-sizing:border-box;font-family:inherit"></textarea>
+            </div>
+            <button type="submit" style="justify-self:start;display:inline-flex;align-items:center;gap:8px;border-radius:6px;padding:12px 24px;font-size:14px;font-weight:700;color:#2f357a;background:#ECBE07;border:none;cursor:pointer;width:fit-content">Send Enquiry</button>
+            <sc-if value="{{ isSent }}">
+              <p style="font-size:14px;color:#15803d;margin:0">Opening your email client — thank you!</p>
+            </sc-if>
+          </form>
+        </div>
+        <aside style="display:flex;flex-direction:column;gap:16px">
+          <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+            <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#6b7280">Address</div>
+            <div style="margin-top:4px;font-size:14px;color:#1f2937">{{ company.address }}</div>
+          </div>
+          <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+            <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#6b7280">Phone</div>
+            <div style="margin-top:4px;font-size:14px"><a href="{{ company.phoneHref }}" style="color:#1f2937">{{ company.phone }}</a></div>
+          </div>
+          <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+            <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#6b7280">Mobile</div>
+            <div style="margin-top:4px;font-size:14px"><a href="{{ company.mobileHref }}" style="color:#1f2937">{{ company.mobile }}</a></div>
+          </div>
+          <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+            <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#6b7280">Email</div>
+            <div style="margin-top:4px;font-size:14px;word-break:break-all"><a href="mailto:{{ company.email }}" style="color:#1f2937">{{ company.email }}</a></div>
+          </div>
+          <div style="border-radius:8px;border:1px solid #e5e7eb;padding:20px">
+            <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#6b7280">Working Hours</div>
+            <div style="margin-top:4px;font-size:14px;color:#1f2937">{{ company.hours }}</div>
+          </div>
+        </aside>
+      </section>
+      <section style="max-width:1280px;margin:0 auto;padding:0 16px 64px 16px">
+        <h2 style="font-size:24px;font-weight:700;color:#2f357a;margin:0 0 16px 0">Find Us</h2>
+        <div style="position:relative;width:100%;height:420px;border-radius:12px;overflow:hidden;border:1px solid #e5e7eb">
+          <iframe title="Al Maas Al Malaki location on Google Maps" src="{{ company.mapsEmbed }}" style="width:100%;height:100%;border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <a href="{{ company.mapsLink }}" target="_blank" rel="noopener noreferrer" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:8px;border-radius:6px;padding:12px 24px;font-size:14px;font-weight:700;color:#2f357a;background:#ECBE07;box-shadow:0 2px 8px rgba(0,0,0,0.2)">Open in Maps</a>
+        </div>
+      </section>
+    </div>
+  </sc-if>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="background:#2f357a;color:#fff;margin-top:auto">
+    <div style="max-width:1280px;margin:0 auto;padding:48px 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <img src="https://al-maas-al-malaki.lovable.app/__l5e/assets-v1/3034617d-ce85-40cd-859c-496f436fdf33/al-maas-al-malaki-logo.webp" alt="Al Maas Al Malaki logo" style="height:48px;width:48px;object-fit:contain;background:#fff;border-radius:6px;padding:4px" />
+          <div style="font-size:18px;font-weight:700">{{ company.short }}</div>
+        </div>
+        <p style="margin-top:12px;font-size:14px;color:rgba(255,255,255,0.8)">Trusted steel stockist, supplier, importer and exporter serving the UAE and the wider GCC market.</p>
+      </div>
+      <div>
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#ECBE07;margin:0">Quick Links</h3>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;font-size:14px">
+          <a href="javascript:void(0)" onClick="{{ goHome }}" style="color:#fff">Home</a>
+          <a href="javascript:void(0)" onClick="{{ goProducts }}" style="color:#fff">Products</a>
+          <a href="javascript:void(0)" onClick="{{ goAbout }}" style="color:#fff">About Us</a>
+          <a href="javascript:void(0)" onClick="{{ goContact }}" style="color:#fff">Contact Us</a>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#ECBE07;margin:0">Categories</h3>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;font-size:14px">
+          <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="7">
+            <a href="javascript:void(0)" onClick="{{ cat.onClick }}" style="color:#fff">{{ cat.name }}</a>
+          </sc-for>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#ECBE07;margin:0">Contact</h3>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;font-size:14px;color:rgba(255,255,255,0.9)">
+          <div>{{ company.address }}</div>
+          <a href="{{ company.phoneHref }}" style="color:#fff">{{ company.phone }}</a>
+          <a href="{{ company.mobileHref }}" style="color:#fff">{{ company.mobile }}</a>
+          <a href="mailto:{{ company.email }}" style="color:#fff;word-break:break-all">{{ company.email }}</a>
+          <div>{{ company.hours }}</div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.1)">
+      <div style="max-width:1280px;margin:0 auto;padding:16px;font-size:12px;color:rgba(255,255,255,0.7);text-align:center">© {{ year }} {{ company.name }}. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <a href="{{ company.whatsapp }}" target="_blank" rel="noopener noreferrer" aria-label="Chat with Al Maas Al Malaki on WhatsApp" style="position:fixed;bottom:20px;right:20px;z-index:100;display:flex;height:56px;width:56px;align-items:center;justify-content:center;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,0.25);background:#25D366">
+    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true">
+      <path fill="#FFFFFF" d="M19.11 17.205c-.372 0-1.088 1.39-1.518 1.39a.63.63 0 0 1-.315-.1c-.802-.402-1.504-.817-2.163-1.447-.545-.516-1.146-1.29-1.46-1.963a.426.426 0 0 1-.073-.215c0-.33.99-.945.99-1.49 0-.143-.73-2.09-.832-2.335-.143-.372-.214-.487-.6-.487-.187 0-.36-.043-.53-.043-.302 0-.53.115-.746.315-.688.645-1.032 1.318-1.06 2.264v.114c-.015.99.472 1.977 1.017 2.79 1.23 1.82 2.506 3.41 4.554 4.34.616.287 2.035.888 2.712.888.788 0 2.578-.53 2.878-1.404.13-.373.13-.702.086-1.017-.13-.83-1.734-1.29-2.06-1.404zM16.026 25.62c-1.633 0-3.24-.4-4.686-1.15L6.87 26.05l1.62-4.343c-.9-1.522-1.35-3.258-1.35-5.008 0-5.02 4.083-9.104 9.103-9.104 5.02 0 9.103 4.084 9.103 9.104 0 5.02-4.083 9.104-9.103 9.104zm0-19.997c-6.014 0-10.9 4.884-10.9 10.897 0 1.906.472 3.796 1.375 5.4L4 28l6.35-2.09c1.573.83 3.33 1.27 5.1 1.27 6.014 0 10.899-4.882 10.899-10.895s-4.885-10.898-10.898-10.898z" />
+    </svg>
+  </a>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { page: "home", categorySlug: null, productSlug: null, prodOpen: false, faqOpen: {}, contactStatus: "idle" };
+
+  industriesRef = React.createRef();
+  nameRef = React.createRef();
+  emailRef = React.createRef();
+  phoneRef = React.createRef();
+  messageRef = React.createRef();
+
+  company = {
+    name: "Al Maas Al Malaki Bldg. Mat. Tr",
+    short: "Al Maas Al Malaki",
+    address: "Plot No. 10680, Al Sajaa Industrial Area, Sharjah, UAE",
+    phone: "+971 6 579 3764",
+    phoneHref: "tel:+97165793764",
+    mobile: "+971 55 742 8754",
+    mobileHref: "tel:+971557428754",
+    email: "almaas.almalaki@outlook.com",
+    hours: "Mon – Sat, 8:00 AM – 6:00 PM",
+    whatsapp: "https://wa.me/971551893786?text=Hi%2C%20I%27m%20interested%20in%20your%20steel%20products",
+    mapsEmbed: "https://www.google.com/maps?q=AL+MAAS+AL+MALAKI+BLDG+MAT+TR+Al+Sajaa+Industrial+Area+Sharjah&output=embed",
+    mapsLink: "https://maps.app.goo.gl/yJz47tAVQ4Z3Peyi7",
+  };
+
+  features = [
+    { t: "Certified Quality", d: "Mill test certificates on all steel products." },
+    { t: "GCC-Wide Delivery", d: "UAE, KSA, Oman, Qatar, Kuwait, Bahrain." },
+    { t: "24/7 Enquiries", d: "WhatsApp support around the clock." },
+    { t: "Wide Stock Range", d: "Structural, MS, SS, pipes, sheets & more." },
+  ];
+  aboutCards = [
+    { t: "Sharjah Stockyard", d: "Deep ready stock at Al Sajaa Industrial Area." },
+    { t: "Certified Quality", d: "EN 10204 3.1 MTC on all steel products." },
+    { t: "UAE & GCC Reach", d: "Serving 6 GCC countries with reliable logistics." },
+    { t: "Working Hours", d: "Mon – Sat, 8:00 AM – 6:00 PM" },
+  ];
+
+  industries = [
+    { title: "Construction & Real Estate", desc: "Structural steel, beams, rebar and hollow sections for high-rises, villas and commercial developments across the UAE.", image: "assets/industry-construction.jpg" },
+    { title: "Oil, Gas & Petrochemicals", desc: "Seamless & ERW pipes, flanges and heavy plates for refineries, pipelines and downstream facilities across the GCC.", image: "assets/industry-oilgas.jpg" },
+    { title: "Steel Fabrication & Workshops", desc: "MS plates, angles, channels and sheets supplied ex-stock to fabricators, welding shops and structural workshops.", image: "assets/industry-fabrication.jpg" },
+    { title: "Infrastructure & Bridges", desc: "Heavy structural sections, plates and reinforcement steel for bridges, highways, tunnels and public infrastructure.", image: "assets/industry-infrastructure.jpg" },
+    { title: "Manufacturing & OEM", desc: "Stainless steel, aluminium sheets and precision bars for OEMs, machinery builders and industrial equipment makers.", image: "assets/industry-manufacturing.jpg" },
+    { title: "Marine & Shipbuilding", desc: "Marine-grade steel plates, pipes and stainless sections for shipyards, port infrastructure and offshore projects.", image: "assets/industry-marine.jpg" },
+  ];
+
+  faqData = [
+    { q: "Who is Al Maas Al Malaki and what steel products do you supply in the UAE?", a: "Al Maas Al Malaki Building Materials Trading is a Sharjah-based steel stockist, supplier, importer and exporter serving the UAE and the wider GCC. We stock a full range of structural steel, mild steel (MS) products, steel pipes & tubes, sheets & coils, stainless steel, aluminium products and mesh & gratings — ready for pickup or delivery." },
+    { q: "Which regions do you deliver steel to across the GCC?", a: "From our Al Sajaa Industrial Area yard in Sharjah, we deliver across the UAE — Dubai, Abu Dhabi, Ajman, Ras Al Khaimah, Fujairah and Umm Al Quwain — and export throughout the GCC to Saudi Arabia, Oman, Qatar, Kuwait and Bahrain." },
+    { q: "Do you provide mill test certificates (MTC) with your steel products?", a: "Yes. Every consignment of structural steel, MS products, stainless steel, pipes and plates is supplied with EN 10204 3.1 mill test certificates for full material traceability and quality assurance on your project." },
+    { q: "What is the minimum order quantity for steel from your Sharjah stockyard?", a: "We serve everything from single-length trade orders to bulk project supply and container-load exports. There is no strict minimum — contact our sales team for a fast quotation on any size requirement." },
+    { q: "Can you cut steel to size or arrange custom lengths?", a: "Yes. We offer cut-to-length services on beams, channels, angles, pipes, sheets and plates so contractors and fabricators receive material ready for use, reducing waste and on-site handling." },
+    { q: "How quickly can you deliver steel in the UAE?", a: "Standard sizes ship same-day or next-day from our Sharjah stockyard across the UAE. Project quantities and export shipments to the GCC are typically dispatched within 2–5 working days depending on volume and destination." },
+  ];
+
+  categories = [
+    {
+      slug: "structural-steel", name: "Structural Steel",
+      short: "Beams, channels, angles, flats, rounds and shaft bars for construction and fabrication.",
+      image: "assets/cat-structural.jpg",
+      intro: "Al Maas Al Malaki is a leading structural steel supplier in the UAE and GCC, stocking a comprehensive range of hot-rolled beams, channels, angles, flat bars, round bars and shaft bars manufactured to international standards (ASTM, EN, JIS, BS). Our structural steel is trusted by fabricators, EPC contractors, construction firms and industrial workshops across Sharjah, Dubai, Abu Dhabi and the wider GCC for its consistent quality, verified mill test certificates and immediate availability from stock.",
+      products: [
+        { slug: "steel-beams", name: "Steel Beams (IPE / UB / H-Beams)", teaser: "IPE, UB and H-section steel beams for structural frames and heavy load-bearing applications.", description: "Our steel beams include IPE, UB (Universal Beams) and H-sections manufactured from S275JR / S355JR / A36 grade steel — engineered for structural frames, warehouses, industrial sheds, mezzanine floors and bridge construction across the UAE and GCC. Every beam ships with full mill test certificates (MTC) and traceability, and we maintain deep stock at our Al Sajaa yard for same-day dispatch on standard sizes.", specs: [{ label: "Material Grade", value: "S275JR, S355JR, ASTM A36" }, { label: "Standard", value: "EN 10025, ASTM A6/A6M" }, { label: "Sizes Available", value: "IPE 80 – IPE 600, UB 127 – UB 914, H 100 – H 400" }, { label: "Length", value: "6m, 9m, 12m (custom cut on request)" }, { label: "Finish", value: "Hot-rolled black / primer painted" }, { label: "Certification", value: "EN 10204 3.1 MTC" }], applications: ["Construction", "Fabrication", "Infrastructure", "Oil & Gas"] },
+        { slug: "steel-channels", name: "Steel Channels (UPN / C-Channels)", teaser: "UPN and C-section channels for framing, brackets and structural supports.", description: "Steel channels (UPN and C-sections) are used extensively in structural framing, purlins, vehicle chassis and support brackets. We stock hot-rolled channels in mild steel grades to EN 10025 and ASTM A36, cut to length and delivered across the UAE from our Sharjah stockyard.", specs: [{ label: "Material Grade", value: "S235JR, S275JR, ASTM A36" }, { label: "Standard", value: "EN 10025, ASTM A6" }, { label: "Sizes Available", value: "UPN 50 – UPN 300, C 75 – C 300" }, { label: "Length", value: "6m / 12m standard" }, { label: "Finish", value: "Hot-rolled black" }, { label: "Certification", value: "EN 10204 3.1 MTC" }], applications: ["Structural framing", "Purlins", "Vehicle chassis", "Support brackets"] },
+        { slug: "steel-angles", name: "Steel Angles (Equal & Unequal)", image: "assets/steel-angles.png", teaser: "Equal and unequal L-angles for bracing, frames and general fabrication.", description: "Hot-rolled equal and unequal steel angles for bracing, tower structures, trusses and general fabrication. Available in a wide range of sizes and grades with certified quality, ready for pickup or delivery anywhere in the UAE and GCC.", specs: [{ label: "Material Grade", value: "S235JR, S275JR, ASTM A36" }, { label: "Type", value: "Equal angle & Unequal angle" }, { label: "Sizes Available", value: "20x20x3 mm to 200x200x20 mm" }, { label: "Length", value: "6m standard" }, { label: "Finish", value: "Hot-rolled black" }, { label: "Application", value: "Trusses, towers, bracing, frames" }], applications: ["Trusses", "Towers", "Bracing", "Frames"] },
+        { slug: "flat-bars", name: "Flat Bars", teaser: "Mild steel flat bars in a wide range of widths and thicknesses.", description: "Hot-rolled mild steel flat bars used for fabrication, gates, grilles, brackets and general engineering work. Stocked in multiple widths and thicknesses ready for immediate dispatch.", specs: [{ label: "Material Grade", value: "S235JR, ASTM A36" }, { label: "Width", value: "20 mm – 200 mm" }, { label: "Thickness", value: "3 mm – 25 mm" }, { label: "Length", value: "6m standard" }, { label: "Finish", value: "Hot-rolled" }, { label: "Standard", value: "EN 10058" }], applications: ["Fabrication", "Gates & grilles", "Brackets", "General engineering"] },
+        { slug: "round-bars", name: "Round Bars", teaser: "Hot-rolled mild steel round bars for machining and shafting.", description: "Mild steel round bars supplied in bright and black finishes for machining, turning, shafting and structural applications. Sourced from reputable mills with full traceability.", specs: [{ label: "Material Grade", value: "EN8, EN9, S355J2, C45" }, { label: "Diameter", value: "6 mm – 200 mm" }, { label: "Length", value: "6m standard, cut-to-length available" }, { label: "Finish", value: "Black / bright drawn" }, { label: "Standard", value: "EN 10060, EN 10083" }, { label: "Application", value: "Shafts, machined parts, structural" }], applications: ["Machining", "Shafting", "Fasteners", "Structural"] },
+        { slug: "shaft-bars", name: "Shaft Bars", image: "assets/shaft-bars.png", teaser: "Precision shaft bars for pumps, motors and rotating equipment.", description: "High-quality shaft bars in medium and high carbon steel grades, ideal for pumps, motors, gearboxes and rotating machinery components. Available bright-drawn and turned-and-polished for tight tolerances.", specs: [{ label: "Material Grade", value: "EN8, EN19, EN24, C45" }, { label: "Diameter", value: "10 mm – 250 mm" }, { label: "Length", value: "3m / 6m" }, { label: "Finish", value: "Bright drawn / turned & polished" }, { label: "Tolerance", value: "h9 / h11" }, { label: "Application", value: "Pump shafts, motor shafts, machinery" }], applications: ["Pumps", "Motors", "Gearboxes", "Rotating equipment"] },
+      ],
+    },
+    {
+      slug: "mild-steel-products", name: "Mild Steel (MS) Products",
+      short: "MS sheets, chequered plates, HR sheets, tubes, hollow sections, angles, flats and rounds.",
+      image: "assets/cat-ms.jpg",
+      intro: "As one of the UAE's most trusted mild steel (MS) suppliers, Al Maas Al Malaki carries a full range of MS sheets, chequered plates, hot-rolled sheets, tubes, hollow sections, angles, flat bars and round bars. Our mild steel products serve construction, oil & gas, workshops, fabricators and manufacturers across Sharjah, Dubai, Abu Dhabi and the GCC, backed by verified mill test certificates and reliable stock availability.",
+      products: [
+        { slug: "ms-sheets", name: "MS Sheets", teaser: "Cold-rolled and hot-rolled mild steel sheets in standard sizes.", description: "Mild steel sheets suitable for fabrication, ductwork, tank shells and general engineering. Supplied in cold-rolled and hot-rolled finishes across popular sizes for pickup or delivery across the UAE.", specs: [{ label: "Material Grade", value: "SPCC / SS400 / ASTM A36" }, { label: "Thickness", value: "0.5 mm – 12 mm" }, { label: "Size", value: "1250 x 2500 mm / 1500 x 3000 mm" }, { label: "Finish", value: "Cold-rolled / Hot-rolled" }, { label: "Standard", value: "JIS G3101 / ASTM A36" }, { label: "Application", value: "Fabrication, ducting, general use" }], applications: ["Fabrication", "Ducting", "Tank shells", "General engineering"] },
+        { slug: "ms-chequered-sheets", name: "MS Chequered Sheets", teaser: "Anti-skid chequered plates for flooring, ramps and platforms.", description: "MS chequered sheets (tear-drop pattern) provide anti-skid safety for flooring, stair treads, ramps, walkways and vehicle platforms. Stocked in popular sizes and thicknesses.", specs: [{ label: "Material Grade", value: "ASTM A36 / SS400" }, { label: "Pattern", value: "Tear-drop chequered" }, { label: "Thickness", value: "3 mm – 12 mm" }, { label: "Size", value: "1250 x 2500 mm / 1500 x 3000 mm" }, { label: "Finish", value: "Hot-rolled black" }, { label: "Application", value: "Anti-skid flooring & platforms" }], applications: ["Flooring", "Ramps", "Stair treads", "Walkways"] },
+        { slug: "ms-hot-rolled-sheets", name: "MS Hot Rolled Sheets", teaser: "HR mild steel sheets and plates in thicker gauges.", description: "Hot-rolled MS sheets and plates in heavier gauges, used for structural fabrication, heavy engineering, storage tanks and pressure parts. Cut-to-size available.", specs: [{ label: "Material Grade", value: "ASTM A36 / S275JR / SS400" }, { label: "Thickness", value: "3 mm – 100 mm" }, { label: "Size", value: "Up to 2000 x 6000 mm" }, { label: "Finish", value: "Hot-rolled (HR)" }, { label: "Standard", value: "ASTM A36 / EN 10025" }, { label: "Certification", value: "EN 10204 3.1 MTC" }], applications: ["Structural fabrication", "Storage tanks", "Heavy engineering"] },
+        { slug: "ms-tubes", name: "MS Tubes", teaser: "Round, square and rectangular mild steel tubes.", description: "Mild steel tubes in round, square and rectangular profiles for structural, furniture, gate and general fabrication use. ERW manufactured with tight dimensional control.", specs: [{ label: "Type", value: "Round / Square / Rectangular" }, { label: "Material Grade", value: "S235JR / ASTM A500" }, { label: "Wall Thickness", value: "1.2 mm – 6 mm" }, { label: "Length", value: "6m standard" }, { label: "Finish", value: "Black / Pre-galvanized" }, { label: "Standard", value: "EN 10219 / ASTM A500" }], applications: ["Fabrication", "Furniture", "Gates", "Structural"] },
+        { slug: "ms-hollow-sections", name: "MS Hollow Sections", teaser: "SHS and RHS hollow structural sections for framing.", description: "Square (SHS) and rectangular (RHS) hollow sections for structural framing, columns, canopies and load-bearing members. ERW-welded to EN 10219 / ASTM A500 standards.", specs: [{ label: "Type", value: "SHS / RHS" }, { label: "Material Grade", value: "S235JR / S355J2H / A500" }, { label: "Size", value: "20x20 mm to 300x300 mm (SHS)" }, { label: "Wall Thickness", value: "1.5 mm – 12 mm" }, { label: "Length", value: "6m / 12m" }, { label: "Standard", value: "EN 10219, ASTM A500" }], applications: ["Structural framing", "Columns", "Canopies", "Trailers"] },
+        { slug: "ms-angles", name: "MS Angles", teaser: "Mild steel L-angles in equal and unequal profiles.", description: "Equal and unequal mild steel angles for general fabrication, tower structures, brackets and trusses. Immediate stock availability at our Sharjah yard.", specs: [{ label: "Type", value: "Equal / Unequal angle" }, { label: "Grade", value: "S235JR / ASTM A36" }, { label: "Sizes", value: "25x25x3 to 150x150x15 mm" }, { label: "Length", value: "6m standard" }, { label: "Finish", value: "Hot-rolled" }, { label: "Standard", value: "EN 10056" }], applications: ["Fabrication", "Towers", "Trusses", "Brackets"] },
+        { slug: "ms-flat-bars", name: "MS Flat Bars", teaser: "Rectangular mild steel flat bars for fabrication.", description: "MS flat bars for general engineering, gates, grilles, brackets and fabricated structures. Multiple widths and thicknesses ex-stock.", specs: [{ label: "Grade", value: "S235JR / ASTM A36" }, { label: "Width", value: "20 mm – 250 mm" }, { label: "Thickness", value: "3 mm – 25 mm" }, { label: "Length", value: "6m" }, { label: "Finish", value: "Hot-rolled" }, { label: "Standard", value: "EN 10058" }], applications: ["Fabrication", "Grilles", "Brackets", "Bases"] },
+        { slug: "ms-round-bars", name: "MS Round Bars", teaser: "Solid round bars in mild steel for machining and structural work.", description: "Mild steel round bars for machining, shafting, anchor bolts and structural components. Supplied black or bright-drawn.", specs: [{ label: "Grade", value: "S235JR / EN8 / C45" }, { label: "Diameter", value: "6 mm – 200 mm" }, { label: "Length", value: "6m" }, { label: "Finish", value: "Black / Bright" }, { label: "Standard", value: "EN 10060" }, { label: "Application", value: "Machining, anchor bolts, shafts" }], applications: ["Machining", "Anchor bolts", "Shafting"] },
+      ],
+    },
+    {
+      slug: "steel-pipes-tubes", name: "Steel Pipes & Tubes",
+      short: "Seamless and ERW steel pipes, MS pipes, MS tubes and hollow sections.",
+      image: "assets/cat-pipes.jpg",
+      intro: "Al Maas Al Malaki supplies a complete range of steel pipes and tubes across the UAE and GCC — including seamless and ERW carbon steel pipes, MS pipes, MS tubes, and structural hollow sections. Trusted by contractors in construction, oil & gas, water and infrastructure projects for consistent supply, certified quality and competitive pricing.",
+      products: [
+        { slug: "steel-pipes", name: "Steel Pipes (Seamless & ERW)", teaser: "Carbon steel seamless and ERW pipes for fluid conveyance and structural use.", description: "Seamless and Electric Resistance Welded (ERW) carbon steel pipes for water lines, oil & gas transmission, fire fighting and structural applications. Available in schedules 40, 80 and XS.", specs: [{ label: "Type", value: "Seamless / ERW" }, { label: "Material Grade", value: "ASTM A106 Gr B / API 5L Gr B" }, { label: "Size (NB)", value: "1/2\" – 24\"" }, { label: "Schedule", value: "SCH 40 / SCH 80 / XS" }, { label: "Length", value: "6m / 12m" }, { label: "Standard", value: "ASTM A53, A106, API 5L" }], applications: ["Water lines", "Oil & gas", "Fire fighting", "Structural"] },
+        { slug: "steel-tubes", name: "Steel Tubes", teaser: "Structural and mechanical steel tubes in round, square and rectangular sections.", description: "Steel tubes for structural, mechanical and general engineering applications. ERW manufactured to EN 10219 / ASTM A500 with clean welds and precise dimensions.", specs: [{ label: "Type", value: "Round / Square / Rectangular" }, { label: "Grade", value: "S235JR / S355J2H / A500 Gr B" }, { label: "OD Range", value: "1/2\" – 12\"" }, { label: "Wall Thickness", value: "1.5 mm – 10 mm" }, { label: "Length", value: "6m / 12m" }, { label: "Standard", value: "EN 10219 / ASTM A500" }], applications: ["Structural", "Mechanical", "Furniture", "Handrails"] },
+        { slug: "ms-pipes", name: "MS Pipes", teaser: "Mild steel round pipes for plumbing, scaffolding and general use.", description: "Mild steel round pipes commonly used for scaffolding, plumbing, water supply and low-pressure fluid transport. Black and pre-galvanized options in stock.", specs: [{ label: "Grade", value: "IS 1239 / BS 1387" }, { label: "Size (NB)", value: "1/2\" – 6\"" }, { label: "Class", value: "Light / Medium / Heavy" }, { label: "Length", value: "6m" }, { label: "Finish", value: "Black / Pre-galvanized" }, { label: "Standard", value: "IS 1239 / EN 10255" }], applications: ["Scaffolding", "Plumbing", "Water supply", "General"] },
+        { slug: "ms-tubes-p", name: "MS Tubes", teaser: "Square, round and rectangular MS tubes ex-stock.", description: "MS tubes in a full range of profiles for fabrication, furniture and structural use. Consistent wall thickness, straight lengths and burr-free ends.", specs: [{ label: "Type", value: "Round / Square / Rectangular" }, { label: "Grade", value: "S235JR" }, { label: "Wall", value: "1.2 mm – 6 mm" }, { label: "Length", value: "6m" }, { label: "Finish", value: "Black / Pre-galvanized" }, { label: "Standard", value: "EN 10219" }], applications: ["Fabrication", "Furniture", "Frames", "Gates"] },
+        { slug: "ms-hollow-sections-p", name: "MS Hollow Sections", teaser: "Structural SHS and RHS for framing and columns.", description: "Square and rectangular mild steel hollow sections for structural framing, columns and load-bearing applications, manufactured to EN 10219 and ASTM A500.", specs: [{ label: "Type", value: "SHS / RHS" }, { label: "Grade", value: "S235JR / S355J2H / A500" }, { label: "Size", value: "20x20 to 300x300 mm" }, { label: "Wall", value: "1.5 mm – 12 mm" }, { label: "Length", value: "6m / 12m" }, { label: "Standard", value: "EN 10219 / ASTM A500" }], applications: ["Framing", "Columns", "Canopies", "Structural"] },
+      ],
+    },
+    {
+      slug: "steel-sheets-coils", name: "Steel Sheets & Coils",
+      short: "HR sheets, GI sheets, chequered sheets and steel coils in bulk quantities.",
+      image: "assets/cat-sheets.jpg",
+      intro: "Al Maas Al Malaki is a bulk supplier of steel sheets and coils across the UAE and GCC — including hot-rolled sheets, galvanised iron (GI) sheets, chequered plates and cold/hot-rolled steel coils. Our supply chain and stockholding cover the needs of roll formers, roofing contractors, HVAC manufacturers, workshops and OEMs.",
+      products: [
+        { slug: "hr-steel-sheets", name: "Hot Rolled Steel Sheets", teaser: "HR sheets in structural and commercial quality grades.", description: "Hot-rolled steel sheets in structural and commercial grades for fabrication, heavy engineering, cutting and forming. Cut-to-size available.", specs: [{ label: "Grade", value: "ASTM A36 / SS400 / S275JR" }, { label: "Thickness", value: "1.5 mm – 25 mm" }, { label: "Size", value: "1250 x 2500 / 1500 x 3000 / 2000 x 6000 mm" }, { label: "Finish", value: "Hot-rolled (HR)" }, { label: "Standard", value: "ASTM A36 / EN 10025" }, { label: "Certification", value: "EN 10204 3.1 MTC" }], applications: ["Fabrication", "Heavy engineering", "Cutting & forming"] },
+        { slug: "gi-sheets", name: "GI Sheets", image: "assets/gi-sheets.png", teaser: "Galvanised iron sheets — plain and corrugated — for roofing and cladding.", description: "Galvanised iron (GI) sheets with a hot-dip zinc coating for excellent corrosion resistance, ideal for roofing, cladding, ducting and outdoor fabrication in the harsh UAE climate.", specs: [{ label: "Base Metal", value: "Cold-rolled / Hot-rolled steel" }, { label: "Coating", value: "Hot-dip galvanised, Z120 – Z275 g/m²" }, { label: "Thickness", value: "0.35 mm – 3 mm" }, { label: "Size", value: "1220 x 2440 / 1250 x 2500 mm" }, { label: "Finish", value: "Plain / Corrugated" }, { label: "Standard", value: "ASTM A653 / EN 10346" }], applications: ["Roofing", "Cladding", "Ducting", "Outdoor fabrication"] },
+        { slug: "chequered-steel-sheets", name: "Chequered Steel Sheets", image: "assets/chequered-steel-sheets.png", teaser: "Tear-drop chequered plates for anti-skid flooring.", description: "Chequered steel sheets (tear-drop pattern) delivering non-slip performance for flooring, stair treads, ramps and vehicle platforms in industrial environments.", specs: [{ label: "Grade", value: "SS400 / ASTM A36" }, { label: "Pattern", value: "Tear-drop" }, { label: "Thickness", value: "3 mm – 12 mm" }, { label: "Size", value: "1250 x 2500 / 1500 x 3000 mm" }, { label: "Finish", value: "Hot-rolled black" }, { label: "Application", value: "Anti-skid flooring" }], applications: ["Flooring", "Ramps", "Stair treads", "Vehicle platforms"] },
+        { slug: "steel-coils", name: "Steel Coils", teaser: "HR, CR and GI steel coils for roll forming and stamping.", description: "Hot-rolled, cold-rolled and galvanised steel coils supplied in master and slit widths for roll formers, tube mills, panel manufacturers and HVAC producers.", specs: [{ label: "Type", value: "HR / CR / GI coils" }, { label: "Thickness", value: "0.35 mm – 8 mm" }, { label: "Coil Width", value: "600 mm – 1500 mm (slit to order)" }, { label: "Coil Weight", value: "3 – 15 MT" }, { label: "Grade", value: "SPCC / SPHC / DX51D / SS400" }, { label: "Standard", value: "JIS G3302 / EN 10346" }], applications: ["Roll forming", "Tube mills", "HVAC panels", "Stamping"] },
+      ],
+    },
+    {
+      slug: "stainless-steel-products", name: "Stainless Steel Products",
+      short: "Stainless steel sheets, round bars and general SS products in 304 / 316 grades.",
+      image: "assets/cat-ss.jpg",
+      intro: "Al Maas Al Malaki stocks a wide range of stainless steel products in 304, 304L, 316 and 316L grades — including SS sheets, round bars and general SS items — serving food-processing, marine, chemical, architectural and pharmaceutical clients across the UAE and GCC.",
+      products: [
+        { slug: "stainless-steel-sheets", name: "Stainless Steel Sheets", teaser: "SS 304 / 316 sheets in 2B, BA, No.4 and mirror finishes.", description: "Stainless steel sheets in 304, 304L, 316 and 316L grades with multiple surface finishes for architectural cladding, kitchen equipment, food processing and marine applications.", specs: [{ label: "Grade", value: "SS 304, 304L, 316, 316L" }, { label: "Thickness", value: "0.5 mm – 6 mm" }, { label: "Size", value: "1219 x 2438 / 1500 x 3000 mm" }, { label: "Finish", value: "2B / BA / No.4 / Mirror (8K)" }, { label: "Standard", value: "ASTM A240" }, { label: "Certification", value: "EN 10204 3.1 MTC" }], applications: ["Architecture", "Kitchens", "Food processing", "Marine"] },
+        { slug: "ss-round-bars", name: "Stainless Steel Round Bars", teaser: "SS round bars for shafting, fasteners and machining.", description: "Stainless steel round bars in bright-drawn and peeled finishes for shafts, fasteners, pump parts and precision machining. Full traceability with MTC.", specs: [{ label: "Grade", value: "SS 304 / 316 / 316L / 410 / 431" }, { label: "Diameter", value: "3 mm – 200 mm" }, { label: "Length", value: "3m / 6m" }, { label: "Finish", value: "Bright drawn / Peeled" }, { label: "Standard", value: "ASTM A276 / EN 10088" }, { label: "Application", value: "Shafts, fasteners, pump parts" }], applications: ["Shafting", "Fasteners", "Machining", "Pump parts"] },
+        { slug: "stainless-steel-products-item", name: "General Stainless Steel Products", teaser: "SS pipes, tubes, angles, flats and fittings on request.", description: "In addition to our stock SS sheets and round bars, we source SS pipes, tubes, angles, flat bars and pipe fittings on request in 304 and 316 grades — with quick lead times across the UAE and GCC.", specs: [{ label: "Grade", value: "SS 304 / 316" }, { label: "Product Range", value: "Pipes, tubes, angles, flats, fittings" }, { label: "Standard", value: "ASTM A312 / A554 / A276" }, { label: "Finish", value: "Pickled / Polished / No.4" }, { label: "Lead Time", value: "Ex-stock / 1–2 weeks indent" }, { label: "Certification", value: "EN 10204 3.1 MTC" }], applications: ["Process industry", "Chemical", "Marine", "Architecture"] },
+      ],
+    },
+    {
+      slug: "aluminum-products", name: "Aluminum Products",
+      short: "Aluminium sheets and chequered plates in marine and architectural grades.",
+      image: "assets/cat-aluminum.jpg",
+      intro: "Al Maas Al Malaki supplies aluminium sheets and chequered plates in marine and architectural grades for the UAE and GCC market. Our aluminium products serve marine, transport, cladding, HVAC and lightweight fabrication needs — corrosion-resistant, easy to form and long-lasting.",
+      products: [
+        { slug: "aluminum-sheets", name: "Aluminum Sheets", teaser: "Plain aluminium sheets in 1050, 3003, 5052 and 6061 grades.", description: "Plain aluminium sheets for cladding, signage, transport bodies, HVAC and lightweight fabrication. Available in mill finish and PE-coated variants.", specs: [{ label: "Alloy", value: "1050 / 3003 / 5052 / 6061" }, { label: "Thickness", value: "0.5 mm – 6 mm" }, { label: "Size", value: "1000 x 2000 / 1250 x 2500 mm" }, { label: "Temper", value: "H14 / H24 / T6" }, { label: "Finish", value: "Mill finish / PE-coated" }, { label: "Standard", value: "EN 573 / ASTM B209" }], applications: ["Cladding", "Signage", "Transport", "HVAC"] },
+        { slug: "aluminum-chequered-sheets", name: "Aluminum Chequered Sheets", teaser: "5-bar aluminium chequered plates for flooring and treads.", description: "Aluminium chequered sheets with a 5-bar tread pattern — lightweight, corrosion-resistant and anti-skid — used for flooring, stair treads, vehicle floors and toolboxes.", specs: [{ label: "Alloy", value: "3003 / 5052" }, { label: "Pattern", value: "5-bar tread" }, { label: "Thickness", value: "1.5 mm – 6 mm" }, { label: "Size", value: "1250 x 2500 mm" }, { label: "Finish", value: "Mill finish" }, { label: "Application", value: "Flooring, treads, vehicle floors" }], applications: ["Flooring", "Stair treads", "Vehicles", "Toolboxes"] },
+      ],
+    },
+    {
+      slug: "mesh-gratings", name: "Mesh & Gratings",
+      short: "Expanded metal mesh, MS mesh, steel mesh and channel gratings.",
+      image: "assets/cat-mesh.jpg",
+      intro: "Al Maas Al Malaki supplies expanded metal mesh, welded steel mesh, MS expanded mesh and channel gratings across the UAE and GCC. Our mesh and gratings products are used for walkways, platforms, façades, safety screens, drainage covers and industrial flooring — engineered for load, slip resistance and long service life.",
+      products: [
+        { slug: "expanded-metal-mesh", name: "Expanded Metal Mesh", teaser: "Diamond-pattern expanded mesh for security, façades and walkways.", description: "Expanded metal mesh cut and stretched from single sheets — no welds, high strength-to-weight ratio — used for façades, security screens, walkways and safety guards.", specs: [{ label: "Material", value: "Mild steel / SS 304 / Aluminium" }, { label: "Pattern", value: "Diamond / Hexagonal" }, { label: "Sheet Size", value: "1250 x 2500 mm" }, { label: "Strand Thickness", value: "1.5 mm – 6 mm" }, { label: "Finish", value: "Mill / Galvanised / Painted" }, { label: "Application", value: "Façades, walkways, security" }], applications: ["Façades", "Walkways", "Security screens", "Guards"] },
+        { slug: "ms-expanded-metal-mesh", name: "MS Expanded Metal Mesh", teaser: "Mild steel expanded mesh in standard and heavy-duty variants.", description: "Mild steel expanded metal mesh in standard and heavy-duty variants — ideal for platforms, ramps, safety screens and general industrial fabrication.", specs: [{ label: "Material", value: "Mild steel (S235JR)" }, { label: "Pattern", value: "Diamond expanded" }, { label: "Sheet Size", value: "1220 x 2440 / 1250 x 2500 mm" }, { label: "Thickness", value: "2 mm – 6 mm" }, { label: "Finish", value: "Black / Galvanised" }, { label: "Standard", value: "ASTM F1267" }], applications: ["Platforms", "Ramps", "Safety screens", "Fabrication"] },
+        { slug: "steel-mesh", name: "Steel Mesh (Welded)", teaser: "Welded steel wire mesh in panels and rolls.", description: "Welded steel wire mesh for reinforcement, fencing, cages, partitions and general construction — supplied in panels and rolls with consistent square openings.", specs: [{ label: "Type", value: "Welded wire mesh — panels & rolls" }, { label: "Wire Diameter", value: "2 mm – 8 mm" }, { label: "Opening", value: "25 x 25 mm to 150 x 150 mm" }, { label: "Panel Size", value: "1200 x 2400 / 2000 x 3000 mm" }, { label: "Finish", value: "Black / Galvanised / PVC-coated" }, { label: "Application", value: "Reinforcement, fencing, cages" }], applications: ["Reinforcement", "Fencing", "Cages", "Partitions"] },
+        { slug: "channel-gratings", name: "Channel Gratings", teaser: "Steel channel gratings for drainage and industrial flooring.", description: "Steel channel gratings for drainage covers, trench covers and industrial flooring — engineered load ratings, slip-resistant surface and hot-dip galvanised for corrosion protection.", specs: [{ label: "Type", value: "Welded / Press-locked grating" }, { label: "Material", value: "Mild steel" }, { label: "Bearing Bar", value: "25x3 to 65x5 mm" }, { label: "Pitch", value: "30 mm x 100 mm typical" }, { label: "Finish", value: "Hot-dip galvanised" }, { label: "Load Class", value: "A15 – E600 (as required)" }], applications: ["Drainage covers", "Trench covers", "Industrial flooring", "Walkways"] },
+      ],
+    },
+  ];
+
+  goHome = () => { this.setState({ page: "home" }); window.scrollTo(0, 0); };
+  goProducts = () => { this.setState({ page: "products" }); window.scrollTo(0, 0); };
+  goAbout = () => { this.setState({ page: "about" }); window.scrollTo(0, 0); };
+  goContact = () => { this.setState({ page: "contact" }); window.scrollTo(0, 0); };
+  goCategory = (slug) => { this.setState({ page: "category", categorySlug: slug, productSlug: null }); window.scrollTo(0, 0); };
+  goProduct = (catSlug, prodSlug) => { this.setState({ page: "product", categorySlug: catSlug, productSlug: prodSlug }); window.scrollTo(0, 0); };
+  toggleFaq = (i) => { this.setState((s) => ({ faqOpen: { ...s.faqOpen, [i]: !s.faqOpen[i] } })); };
+  scrollIndustries = (dx) => { if (this.industriesRef.current) this.industriesRef.current.scrollBy({ left: dx, behavior: "smooth" }); };
+
+  onContactSubmit = (e) => {
+    e.preventDefault();
+    const name = (this.nameRef.current?.value || "").trim();
+    const email = (this.emailRef.current?.value || "").trim();
+    const phone = (this.phoneRef.current?.value || "").trim();
+    const message = (this.messageRef.current?.value || "").trim();
+    if (!name || !email || !message) return;
+    const body = `Name: ${name}%0APhone: ${phone}%0AEmail: ${email}%0A%0A${encodeURIComponent(message)}`;
+    window.location.href = `mailto:${this.company.email}?subject=Enquiry from ${encodeURIComponent(name)}&body=${body}`;
+    this.setState({ contactStatus: "sent" });
+    e.currentTarget.reset();
+  };
+
+  renderVals() {
+    const { page, categorySlug, productSlug, prodOpen, faqOpen, contactStatus } = this.state;
+
+    const categories = this.categories.map((c) => ({
+      ...c,
+      productCount: c.products.length,
+      onClick: () => this.goCategory(c.slug),
+      topProducts: c.products.slice(0, 3).map((p) => ({ ...p, onClick: () => this.goProduct(c.slug, p.slug) })),
+    }));
+
+    let currentCategory = null, currentProduct = null, relatedProducts = [];
+    if (categorySlug) {
+      const catRaw = this.categories.find((c) => c.slug === categorySlug);
+      if (catRaw) {
+        currentCategory = {
+          ...catRaw,
+          onClick: () => this.goCategory(catRaw.slug),
+          products: catRaw.products.map((p) => ({ ...p, cardImage: p.image || catRaw.image, onClick: () => this.goProduct(catRaw.slug, p.slug) })),
+        };
+        if (productSlug) {
+          const prodRaw = catRaw.products.find((p) => p.slug === productSlug);
+          if (prodRaw) {
+            currentProduct = { ...prodRaw, cardImage: prodRaw.image || catRaw.image, specs: prodRaw.specs.map((s, i) => ({ ...s, rowBg: i % 2 ? "#f9fafb" : "#fff" })) };
+            relatedProducts = catRaw.products.filter((p) => p.slug !== productSlug).slice(0, 4).map((p) => ({ ...p, cardImage: p.image || catRaw.image, onClick: () => this.goProduct(catRaw.slug, p.slug) }));
+          }
+        }
+      }
+    }
+
+    const faqs = this.faqData.map((f, i) => ({ ...f, open: !!faqOpen[i], sign: faqOpen[i] ? "–" : "+", toggle: () => this.toggleFaq(i) }));
+
+    const enquireUrl = currentProduct ? `https://wa.me/971551893786?text=${encodeURIComponent("Hi, I would like to enquire about " + currentProduct.name + ".")}` : "";
+
+    return {
+      company: this.company,
+      isHome: page === "home",
+      isProducts: page === "products",
+      isCategory: page === "category" && !!currentCategory,
+      isProduct: page === "product" && !!currentProduct,
+      isAbout: page === "about",
+      isContact: page === "contact",
+      hasRelated: relatedProducts.length > 0,
+      isSent: contactStatus === "sent",
+      categories, industries: this.industries, faqs, features: this.features, aboutCards: this.aboutCards,
+      currentCategory, currentProduct, relatedProducts, enquireUrl,
+      goHome: this.goHome, goProducts: this.goProducts, goAbout: this.goAbout, goContact: this.goContact,
+      prodOpen,
+      setProdOpenTrue: () => this.setState({ prodOpen: true }),
+      setProdOpenFalse: () => this.setState({ prodOpen: false }),
+      scrollLeft: () => this.scrollIndustries(-360),
+      scrollRight: () => this.scrollIndustries(360),
+      industriesRef: this.industriesRef,
+      year: new Date().getFullYear(),
+      contactNameRef: this.nameRef, contactEmailRef: this.emailRef, contactPhoneRef: this.phoneRef, contactMessageRef: this.messageRef,
+      onContactSubmit: this.onContactSubmit,
+    };
+  }
+}
+
+</script>
 </body>
 </html>
